@@ -22,8 +22,11 @@ Java.perform(function () {
     var response_class = Java.use('');
     var response_method = '';
 
-    request_class.request_method.overload('java.lang.String').implementation = function (request) {
-        console.log(colors.green, "[Original Request Body]\n", colors.resetColor, JSON.stringify(request), '\n');
+    request_class.request_method.overload('java.lang.String').implementation = function (arg0) {
+        console.log(colors.green, "[Original Request Body]\n", colors.resetColor, JSON.stringify(arg0), '\n');
+
+        var js = {};
+        
         send({ from: '/http', payload: JSON.stringify(js), api_path: 'request' })
 
         var rcv_data = "FAILURE";
@@ -46,8 +49,11 @@ Java.perform(function () {
         return result;
     }
 
-    response_class.response_method.overload('java.lang.String').implementation = function (response) {
-        console.log(colors.green, "[Original Response Body]\n", colors.resetColor, JSON.stringify(response), '\n');
+    response_class.response_method.overload('java.lang.String').implementation = function (arg0) {
+        console.log(colors.green, "[Original Response Body]\n", colors.resetColor, JSON.stringify(arg0), '\n');
+
+        var js = {};
+        
         send({ from: '/http', payload: JSON.stringify(js), api_path: 'response' })
 
         var rcv_data = "FAILURE";
